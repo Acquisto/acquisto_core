@@ -1,0 +1,15 @@
+
+<!-- indexer::stop -->
+<div class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
+
+  <?php if ($this->headline): ?>
+    <<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
+  <?php endif; ?>
+
+  <ul>
+    <?php foreach($this->items as $item): ?>
+    <li<?php if($item->css): ?> class="<?= $item->css; ?>"<?php endif; ?>><?php if($item->href): ?><a href="<?= $item->href; ?>" title="<?= $item->title; ?>"><?php endif; ?><?= $item->title; ?><?php if($item->href): ?></a><?php endif; ?></li>
+    <?php endforeach; ?>
+  </ul>
+</div>
+<!-- indexer::continue -->

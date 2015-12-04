@@ -1,0 +1,12 @@
+
+<div id="tl_buttons">
+  <a href="<?= $this->href ?>" class="header_back" title="<?= $this->title ?>"><?= $this->button ?></a>
+</div>
+
+<h1 id="tl_welcome">Acquisto 2.x</h1>
+
+<div class="tl_formbody_edit">
+    <fieldset class="tl_box" id="pal_introduction">
+	<legend onclick="AjaxRequest.toggleFieldset(this,'introduction','iso_be_overview_legend')">Einführung</legend>
+    </fieldset>
+</div>
