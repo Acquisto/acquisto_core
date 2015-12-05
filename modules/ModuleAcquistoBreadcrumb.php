@@ -1,7 +1,7 @@
 <?php
 
 namespace Acquisto\Frontend;
-use Acquisto\Models\ShopCategoryModel as CategoryModel;
+use Acquisto\Models;
 
 class ModuleAcquistoBreadcrumb extends \Module
 {
@@ -34,8 +34,7 @@ class ModuleAcquistoBreadcrumb extends \Module
 	protected function compile()
 	{
 		foreach($this->trail as $id) {
-			$item = CategoryModel::findById($id);
-			$item->css = '';
+			$item = \ShopCategoryModel::findById($id);
 
 			switch($item->type) {
 				case "category":
@@ -43,7 +42,7 @@ class ModuleAcquistoBreadcrumb extends \Module
 					$pageAdd = '/category/' . $item->alias;
 					break;;
 				case "redirect":
-					$objRedirect = CategoryModel::findById($item['categoryJump']);
+					$objRedirect = \ShopCategoryModel::findById($item['categoryJump']);
 
 					$pageId = $this->acquisto_jumpTo;
 					$pageAdd = '/category/'. $objRedirect->alias;
@@ -71,13 +70,17 @@ class ModuleAcquistoBreadcrumb extends \Module
 				$item->href = \Controller::generateFrontendUrl($objPage->row(), $pageAdd);
 			}
 
+			if($item->cssClass) {
+				$item->css = $item->cssClass;
+			}
+
 			if(($this->showHidden && $item->hide) OR !$item->hide) {
 				$items[] = $item;
 			}
 		}
 
-		$items[0]->css .= 'first';
-		$items[count($items) - 1]->css .= 'active last';
+		$items[0]->css                  = trim($items[0]->css . ' first');
+		$items[count($items) - 1]->css  = trim($items[count($items) - 1]->css . ' active last');
 		$items[count($items) - 1]->href = '';
 
 		$this->Template->items = $items;
