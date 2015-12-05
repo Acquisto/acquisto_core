@@ -19,9 +19,12 @@ ClassLoader::addClasses(array
 	'Acquisto\Frontend\ModuleAcquistoCategoryNav' => 'system/modules/acquisto_core/modules/ModuleAcquistoCategoryNav.php',
 
 	'Acquisto\Models\ShopCategoryModel'           => 'system/modules/acquisto_core/models/ShopCategoryModel.php',
+	'Acquisto\Models\ShopCurrencyModel'           => 'system/modules/acquisto_core/models/ShopCurrencyModel.php',
 	'Acquisto\Models\ShopManufactureModel'        => 'system/modules/acquisto_core/models/ShopManufactureModel.php',
+	'Acquisto\Models\ShopPricelistModel'          => 'system/modules/acquisto_core/models/ShopPricelistModel.php',
 	'Acquisto\Models\ShopTaxModel'                => 'system/modules/acquisto_core/models/ShopTaxModel.php',
-	'Acquisto\Models\ShopTaxrateModel'            => 'system/modules/acquisto_core/models/ShopTaxrateModel.php'
+	'Acquisto\Models\ShopTaxrateModel'            => 'system/modules/acquisto_core/models/ShopTaxrateModel.php',
+	'Acquisto\Models\ShopUnitModel'               => 'system/modules/acquisto_core/models/ShopUnitModel.php'
 ));
 
 TemplateLoader::addFiles(array
