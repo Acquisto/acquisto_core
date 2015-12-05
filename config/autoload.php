@@ -2,7 +2,6 @@
 
 ClassLoader::addNamespaces(array
 (
-
 	'Acquisto',
 	'Acquisto\Backend',
 	'Acquisto\Classes',
@@ -20,6 +19,9 @@ ClassLoader::addClasses(array
 	'Acquisto\Frontend\ModuleAcquistoCategoryNav' => 'system/modules/acquisto_core/modules/ModuleAcquistoCategoryNav.php',
 
 	'Acquisto\Models\ShopCategoryModel'           => 'system/modules/acquisto_core/models/ShopCategoryModel.php',
+	'Acquisto\Models\ShopManufactureModel'        => 'system/modules/acquisto_core/models/ShopManufactureModel.php',
+	'Acquisto\Models\ShopTaxModel'                => 'system/modules/acquisto_core/models/ShopTaxModel.php',
+	'Acquisto\Models\ShopTaxrateModel'            => 'system/modules/acquisto_core/models/ShopTaxrateModel.php'
 ));
 
 TemplateLoader::addFiles(array
