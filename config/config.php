@@ -14,3 +14,6 @@ array_insert($GLOBALS['FE_MOD']['acquisto'], 0, array
 	'acquisto_breadcrumb'          => 'ModuleAcquistoBreadcrumb',
 	'acquisto_category_nav'        => 'ModuleAcquistoCategoryNav'
 ));
+
+$GLOBALS['TL_HOOKS']['replaceInsertTags'][] = array('Acquisto\Classes\InsertTags', 'onReplaceInsertTags');
+$GLOBALS['TL_HOOKS']['generatePage'][]      = array('Acquisto\Classes\AcquistoSystem', 'onGeneratePage');
