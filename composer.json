@@ -1,0 +1,37 @@
+{
+	"name":"acquisto/acquisto_core",
+	"description":"Alpha Release Contao eCommerce System",
+	"keywords":["contao","eCommerce", "Shop", "Webshop"],
+	"type":"contao-module",
+	"homepage":"http://www.contao-acquisto.de",
+	"license":"LGPLv3",
+	"authors":[
+		{
+			"name":"Sascha Brandhoff",
+			"email":"sascha.brandhoff@gmail.com",
+			"homepage":"https://www.paypal.me/pixelSpreadde",
+			"role":"Developer"
+		}
+	],
+	"support":{
+		"email":"sascha.brandhoff@gmail.com",
+		"issues":"https://github.com/acquisto/acquisto_core/issues",
+		"source":"https://github.com/acquisto/acquisto_core",
+		"forum":"https://community.contao.org/de/forumdisplay.php?159-acquistoShop"
+	},
+	"require":{
+		"php":">=5.3",
+		"contao/core": ">=3.5,<3.6",
+		"codefog/contao-widget_tree_picker": ">=2.0"
+	},
+	"replace":{
+		"acquisto/acquisto_core":"self.version"
+	},
+	"extra":{
+		"contao":{
+			"sources":{
+				"":"system/modules/acquisto_core"
+			}
+		}
+	}
+}
