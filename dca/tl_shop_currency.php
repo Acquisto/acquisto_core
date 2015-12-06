@@ -26,7 +26,7 @@ $GLOBALS['TL_DCA']['tl_shop_currency'] = array
 			'mode'                    => 1,
 			'fields'                  => array('title'),
 			'flag'                    => 1,
-			'panelLayout'             => 'search,limit'
+			'panelLayout'             => 'filter;search,limit'
 		),
 		'label' => array
 		(
@@ -35,46 +35,51 @@ $GLOBALS['TL_DCA']['tl_shop_currency'] = array
 		),
 		'global_operations' => array
 		(
-		'all' => array
-		(
-			'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
-			'href'                => 'act=select',
-			'class'               => 'header_edit_all',
-			'attributes'          => 'onclick="Backend.getScrollOffset();"'
-		)
-	),
-	'operations' => array
-	(
-		'edit' => array
-		(
-			'label'               => &$GLOBALS['TL_LANG']['tl_shop_currency']['edit'],
-			'href'                => 'act=edit',
-			'icon'                => 'edit.gif'
+			'all' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
+				'href'                => 'act=select',
+				'class'               => 'header_edit_all',
+				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+			)
 		),
-		'copy' => array
+		'operations' => array
 		(
-			'label'               => &$GLOBALS['TL_LANG']['tl_shop_currency']['copy'],
-			'href'                => 'act=copy',
-			'icon'                => 'copy.gif'
-		),
-		'delete' => array
-		(
-			'label'               => &$GLOBALS['TL_LANG']['tl_shop_currency']['delete'],
-			'href'                => 'act=delete',
-			'icon'                => 'delete.gif',
-			'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
-		),
-		'show' => array
-		(
-			'label'               => &$GLOBALS['TL_LANG']['tl_shop_currency']['show'],
-			'href'                => 'act=show',
-			'icon'                => 'show.gif'
+			'edit' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_shop_currency']['edit'],
+				'href'                => 'act=edit',
+				'icon'                => 'edit.gif'
+			),
+			'copy' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_shop_currency']['copy'],
+				'href'                => 'act=copy',
+				'icon'                => 'copy.gif'
+			),
+			'delete' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_shop_currency']['delete'],
+				'href'                => 'act=delete',
+				'icon'                => 'delete.gif',
+				'attributes'          => 'onclick="if (!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\')) return false; Backend.getScrollOffset();"'
+			),
+			'show' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_shop_currency']['show'],
+				'href'                => 'act=show',
+				'icon'                => 'show.gif'
 			)
 		)
 	),
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title;{config_legend},default_currency,iso_code,exchange_ratio;{show_legend},guests',
+		'__selector__'                => array('protected'),
+		'default'                     => '{title_legend},title;{config_legend},default_currency,iso_code,exchange_ratio;{protected_legend},protected'
+	),
+	'subpalettes' => array
+	(
+		'protected'                   => 'groups'
 	),
 	'fields' => array
 	(
@@ -98,23 +103,30 @@ $GLOBALS['TL_DCA']['tl_shop_currency'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_currency']['default_currency'],
 			'inputType'               => 'checkbox',
-			'search'                  => true,
+			'filter'                  => true,
 			'eval'                    => array('mandatory'=>false, 'maxlength'=>255),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
-		'guests' => array
+		'protected' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_currency']['guests'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_currency']['protected'],
 			'inputType'               => 'checkbox',
-			'search'                  => true,
-			'eval'                    => array('mandatory'=>false, 'maxlength'=>255, 'tl_class'=>'w50'),
+			'filter'                  => true,
+			'eval'                    => array('submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'groups' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_currency']['groups'],
+			'inputType'               => 'checkbox',
+			'foreignKey'              => 'tl_member_group.name',
+			'eval'                    => array('multiple'=>true, 'mandatory'=>true),
+			'sql'                     => "blob NOT NULL"
 		),
 		'iso_code' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_currency']['iso_code'],
 			'inputType'               => 'text',
-			'search'                  => true,
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>64, 'tl_class'=>'w50'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
@@ -123,7 +135,6 @@ $GLOBALS['TL_DCA']['tl_shop_currency'] = array
 			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_currency']['exchange_ratio'],
 			'inputType'               => 'text',
 			'default'                 => '0',
-			'search'                  => true,
 			'options'                 => $GLOBALS['ACQUISTO_CONFIG']['currency'],
 			'eval'                    => array('mandatory'=>true, 'rgxp' => 'digit', 'maxlength'=>255, 'tl_class'=>'w50', 'includeBlankOption' => true),
 			'sql'                     => "float NOT NULL default '0'"

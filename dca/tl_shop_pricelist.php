@@ -26,7 +26,7 @@ $GLOBALS['TL_DCA']['tl_shop_pricelist'] = array
 			'mode'                    => 1,
 			'fields'                  => array('title'),
 			'flag'                    => 1,
-			'panelLayout'             => 'search,limit'
+			'panelLayout'             => 'filter;search,limit'
 		),
 		'label' => array
 		(
@@ -74,7 +74,12 @@ $GLOBALS['TL_DCA']['tl_shop_pricelist'] = array
 	),
 	'palettes' => array
 	(
-		'default'                     => '{title_legend},title,default_list;{config_legend},type,currency,exchange_ratio;{show_legend},guests,groups',
+		'__selector__'                => array('protected'),
+		'default'                     => '{title_legend},title,default_list;{config_legend},type,currency,exchange_ratio;{protected_legend},protected'
+	),
+	'subpalettes' => array
+	(
+		'protected'                   => 'groups'
 	),
 	'fields' => array
 	(
@@ -98,7 +103,7 @@ $GLOBALS['TL_DCA']['tl_shop_pricelist'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_pricelist']['type'],
 			'inputType'               => 'select',
-			'search'                  => true,
+			'filter'                  => true,
 			'options'                 => array('+', '-'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_shop_pricelist']['type_reference'],
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50', 'includeBlankOption' => true),
@@ -108,33 +113,31 @@ $GLOBALS['TL_DCA']['tl_shop_pricelist'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_pricelist']['currency'],
 			'inputType'               => 'select',
-			'search'                  => true,
 			'foreignKey'              => 'tl_shop_currency.title',
 			'eval'                    => array('mandatory'=>true, 'maxlength'=>255, 'tl_class'=>'w50', 'includeBlankOption' => true),
 			'sql'                     => "int(10) NOT NULL default '0'"
+		),
+		'protected' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_pricelist']['protected'],
+			'inputType'               => 'checkbox',
+			'filter'                  => true,
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 		'groups' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_pricelist']['groups'],
 			'inputType'               => 'checkbox',
 			'foreignKey'              => 'tl_member_group.name',
-			'search'                  => false,
-			'eval'                    => array('multiple'=>true, 'mandatory'=>false, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default ''"
-		),
-		'guests' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_pricelist']['guests'],
-			'inputType'               => 'checkbox',
-			'search'                  => true,
-			'eval'                    => array('mandatory'=>false, 'maxlength'=>255, 'tl_class'=>'w50'),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'eval'                    => array('multiple'=>true, 'mandatory'=>true),
+			'sql'                     => "blob NOT NULL"
 		),
 		'default_list' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_shop_pricelist']['default_list'],
 			'inputType'               => 'checkbox',
-			'search'                  => true,
+			'filter'                  => true,
 			'eval'                    => array('mandatory'=>false, 'maxlength'=>255, 'tl_class'=>'w50'),
 			'sql'                     => "char(1) NOT NULL default ''"
 		)
