@@ -16,10 +16,25 @@ $GLOBALS['BE_MOD']['acquisto'] = array
 
 $GLOBALS['BE_MOD']['acquisto_settings'] = array
 (
+	'acquisto_unit' => array
+	(
+		'tables'     => array('tl_shop_unit'),
+		'icon'       => 'system/modules/acquisto_core/assets/icons/be/table.png',
+	),
 	'acquisto_tax' => array
 	(
 		'tables'     => array('tl_shop_tax', 'tl_shop_taxrate'),
 		'icon'       => 'system/modules/acquisto_core/assets/icons/be/ruby.png',
+	),
+	'acquisto_currency' => array
+	(
+		'tables'     => array('tl_shop_currency'),
+		'icon'       => 'system/modules/acquisto_core/assets/icons/be/coins.png',
+	),
+	'acquisto_pricelist' => array
+	(
+		'tables'     => array('tl_shop_pricelist'),
+		'icon'       => 'system/modules/acquisto_core/assets/icons/be/page_paste.png',
 	)
 );
 
